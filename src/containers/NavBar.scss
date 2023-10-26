@@ -1,0 +1,41 @@
+.navbar {
+  display: flex;
+  height: 3rem;
+  background-color: #222;
+  align-items: center;
+}
+
+.navbar-title {
+  margin: 0;
+  margin-left: 2rem;
+  margin-right: auto;
+  color: #ddd;
+  cursor: pointer;
+}
+
+.navbar-menu {
+  background: transparent;
+  border: none;
+  margin-right: 2rem;
+  cursor: pointer;
+}
+
+.navbar-menu-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.navbar-menu-dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #555;
+  min-width: 10rem;
+  width: 20rem;
+  padding: 1rem;
+  z-index: 10;
+}
+
+.navbar-menu-dropdown:hover .navbar-menu-dropdown-content {
+  display: block;
+}
