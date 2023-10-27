@@ -1,25 +1,49 @@
-import { useState } from 'react';
-import reactLogo from '../assets/react.svg';
-import viteLogo from '/vite.svg';
+import zealthyLogo from '../assets/ZealthyLogo2.jpeg';
 
 const Home = () => {
-  const [count, setCount] = useState(0);
   return (
     <div className='home'>
+      <br />
+      <p>
+        Thank you for using the Zealthy HelpDesk! Enter your information below:
+      </p>
+      <br />
       <>
-        <div>
-          <a href='https://vitejs.dev' target='_blank'>
-            <img src={viteLogo} className='logo' alt='Vite logo' />
-          </a>
-          <a href='https://react.dev' target='_blank'>
-            <img src={reactLogo} className='logo react' alt='React logo' />
-          </a>
-        </div>
-        <div className='card'>
-          <button onClick={() => setCount((count) => count + 1)}>
-            count is {count}
-          </button>
-        </div>
+        <form autoComplete='off'>
+          <label htmlFor='name'>Name</label>
+          <input
+            type='text'
+            name='name'
+            placeholder='Bruce Wayne'
+            autoFocus
+            required
+          />
+          <br /> <br />
+          <label htmlFor='email'> Email</label>
+          <input
+            type='email'
+            name='email'
+            placeholder='Iam@batman.com'
+            required
+          />
+          <br />
+          <br />
+          <label htmlFor='description'>Description</label>
+          <br />
+          <input
+            type='text'
+            name='description'
+            placeholder='Describe the problem (the more details you provide, the better we
+              can assist you!)'
+            required
+          />
+          <br />
+          <input type='submit' name='description' />
+        </form>
+        <br />
+        <a href='https://www.getzealthy.com/' target='_blank'>
+          <img src={zealthyLogo} className='logo zealthy' alt='zealthy logo' />
+        </a>
       </>
     </div>
   );

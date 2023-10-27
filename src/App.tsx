@@ -3,9 +3,10 @@ import { Route, Routes } from 'react-router-dom';
 // import { useCookies } from 'react-cookie';
 
 import './App.scss';
-import Navbar from './containers/Navbar.tsx';
-import NotFound from './containers/NotFound.tsx';
-import Home from './containers/Home.tsx';
+import Navbar from './containers/Navbar';
+import NotFound from './containers/NotFound';
+import Home from './containers/Home';
+import Login from './containers/Login.tsx';
 
 function App() {
   // const [user, setUser] = useState('');
@@ -30,6 +31,7 @@ function App() {
             />
           }
         />
+        <Route path='login' element={<Login />} />
       </Routes>
     </>
   );
