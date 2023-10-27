@@ -6,10 +6,9 @@ import ticketRouter from './routers/ticketRouter';
 
 dotenv.config();
 
-// eslint-disable-next-line no-undef
 const PORT = process.env.PORT;
 
-// init const app as express server
+// initialize express server
 const app = express();
 
 app.use(cors());
@@ -17,12 +16,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Serve static assets
-// eslint-disable-next-line no-undef
 app.use('/dist', express.static(path.resolve(__dirname, '../dist')));
 
 // Serve index.html
-// eslint-disable-next-line no-undef
-app.use('/', express.static(path.join(__dirname, '../src/index.html')));
+app.use('/', express.static(path.join(__dirname, '../index.html')));
 
 // ticketRouter
 app.use('/tickets', ticketRouter);

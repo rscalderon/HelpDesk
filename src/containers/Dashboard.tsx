@@ -10,8 +10,13 @@ import Loader from '../components/Loader';
 function Dashboard() {
   const [ticketArr, setTickets] = useState([]);
   // fetch tickets from backend
-  const fetchTickets = () => {
-    fetch('/api/tickets', {})
+  const getTickets = () => {
+    fetch('/api/tickets', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
       // parse into JS from JSON
       .then((res) => res.json())
       // update state to incoming tickets
@@ -22,7 +27,7 @@ function Dashboard() {
       .catch((err) => console.error(err));
   };
   try {
-    fetchTickets();
+    getTickets();
   } catch (e) {
     console.error(e);
   }

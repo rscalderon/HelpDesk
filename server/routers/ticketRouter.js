@@ -1,16 +1,16 @@
 import { Router } from 'express';
 import ticketController from '../controllers/ticketController';
 
+// localhost:3001/api/tickets
 const ticketRouter = Router();
 
-ticketRouter.get('/', ticketController.picOfDay, (req, res) => {
-  return res.status(200).json(res.locals.returnObject);
+ticketRouter.get('/', ticketController.getTickets, (req, res) => {
+  return res.status(200).json();
 });
 
-ticketRouter.get('/search', ticketController.getData, (req, res) => {
+ticketRouter.post('/', ticketController.addTicket, (req, res) => {
   console.log('inside the ticketRouter');
-  return res.status(200).json(res.locals.resultsObject);
+  return res.status(200).json();
 });
-// localhost:3000/api/search?=
 
 export default ticketRouter;
