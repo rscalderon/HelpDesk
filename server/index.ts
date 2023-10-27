@@ -16,10 +16,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Serve static assets
-app.use('/dist', express.static(path.resolve(__dirname, '../dist')));
+app.use('/dist', express.static(path.resolve('../dist')));
 
 // Serve index.html
-app.use('/', express.static(path.join(__dirname, '../index.html')));
+app.use('/', express.static(path.join('../index.html')));
 
 // ticketRouter
 app.use('/tickets', ticketRouter);
