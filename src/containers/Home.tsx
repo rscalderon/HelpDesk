@@ -1,11 +1,14 @@
+// assets
 import zealthyLogo from '../assets/ZealthyLogo2.jpeg';
 
+// Home page container
 const Home = () => {
   return (
     <div className='home'>
       <br />
       <p>
-        Thank you for using the Zealthy HelpDesk! Enter your information below:
+        Thank you for using the Zealthy HelpDesk! Please fill out the form
+        below:
       </p>
       <br />
       <>

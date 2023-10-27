@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import './NavBar.scss';
 
+// Renders Navbar component
 const Navbar = () => {
   const navigate = useNavigate();
 
