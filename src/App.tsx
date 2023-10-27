@@ -1,41 +1,33 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+// import { useCookies } from 'react-cookie';
 
 import './App.scss';
-import Navbar from './containers/Navbar.jsx';
+import Navbar from './containers/Navbar.tsx';
+import NotFound from './containers/NotFound.tsx';
+import Home from './containers/Home.tsx';
 
 function App() {
-  const [count, setCount] = useState(0);
+  // const [user, setUser] = useState('');
+  // const [cookies, setCookie, removeCookie] = useCookies(['user']);
 
   return (
     <>
       <Navbar />
       {/* Home route  */}
       <Routes>
+        <Route path='/' element={<Home />} />
+        {/* 404 unknown route */}
         <Route
-          path='/'
+          path='*'
           element={
-            <>
-              <div>
-                <a href='https://vitejs.dev' target='_blank'>
-                  <img src={viteLogo} className='logo' alt='Vite logo' />
-                </a>
-                <a href='https://react.dev' target='_blank'>
-                  <img
-                    src={reactLogo}
-                    className='logo react'
-                    alt='React logo'
-                  />
-                </a>
-              </div>
-              <div className='card'>
-                <button onClick={() => setCount((count) => count + 1)}>
-                  count is {count}
-                </button>
-              </div>
-            </>
+            <NotFound
+            // user={user}
+            // setUser={setUser}
+            // cookies={cookies}
+            // setCookie={setCookie}
+            // removeCookie={removeCookie}
+            />
           }
         />
       </Routes>
