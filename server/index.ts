@@ -8,17 +8,15 @@ dotenv.config();
 
 const PORT = process.env.PORT;
 
-// initialize express server
 const app = express();
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// ticketRouter
 app.use('/tickets', ticketRouter);
 
-// // Serve static assets
+// Serve static assets
 app.use('/dist', express.static(path.resolve('../dist')));
 
 // // Serve index.html
