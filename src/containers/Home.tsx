@@ -86,8 +86,7 @@ const Home = () => {
             type='text'
             id='descriptionInput'
             name='description'
-            placeholder='Describe the problem (the more details you provide, the better we
-              can assist you!)'
+            placeholder='Describe the problem (the more details you provide, the better we can assist you!)'
             required
           />
           <br />
