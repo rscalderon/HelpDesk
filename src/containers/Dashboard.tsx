@@ -9,6 +9,8 @@ interface TicketRecords {
   email: string;
   description: string;
   status: string;
+  created_at: Date;
+  _id: string;
 }
 
 // The Dashboard container fetches tickets from the database and renders them
@@ -27,22 +29,20 @@ function Dashboard() {
   };
   useEffect(() => getTickets(), []);
   // create ticket component for each ticket from database
-  const ticketComponents: JSX.Element[] = ticketArr.map(
-    (t: TicketRecords, i) => (
-      <section key={i}>
-        <Ticket
-          name={t.name}
-          created_at={t.created_at}
-          id={t._id}
-          email={t.email}
-          description={t.description}
-          status={t.status}
-          getTickets={getTickets}
-        />
-        <br />
-      </section>
-    )
-  );
+  const ticketComponents = ticketArr.map((t: TicketRecords, i) => (
+    <section key={i}>
+      <Ticket
+        name={t.name}
+        created_at={t.created_at}
+        id={t._id}
+        email={t.email}
+        description={t.description}
+        status={t.status}
+        getTickets={getTickets}
+      />
+      <br />
+    </section>
+  ));
 
   return (
     <>

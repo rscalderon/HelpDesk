@@ -2,16 +2,25 @@
 import { FormEvent } from 'react';
 import zealthyLogo from '../assets/ZealthyLogo2.jpeg';
 
+interface TicketFormOutput extends HTMLCollectionOf<HTMLFormElement> {
+  newTicket: {
+    name: { value: string };
+    email: { value: string };
+    description: { value: string };
+  };
+}
+
 // Home page container
 const Home = () => {
   // request backend to create new ticket based on form inputs
   const createTicket = (e: FormEvent) => {
     // prevent redirect and page refresh
     e.preventDefault();
+    const formInfo = (document.forms as TicketFormOutput).newTicket;
     // extract form information
-    const name = document.forms.newTicket.name.value;
-    const email = document.forms.newTicket.email.value;
-    const description = document.forms.newTicket.description.value;
+    const name = formInfo.name.value;
+    const email = formInfo.email.value;
+    const description = formInfo.description.value;
     // send request to backend
     fetch('/api/tickets', {
       method: 'POST',
@@ -31,9 +40,7 @@ const Home = () => {
       )
       .catch((e) =>
         console.error(
-          'Error creating helpdesk ticket:',
-          e,
-          ' Please try again later'
+          `Error creating helpdesk ticket:${e} Please try again later`
         )
       );
   };
@@ -50,7 +57,6 @@ const Home = () => {
         <form
           autoComplete='off'
           name='newTicket'
-          action='/api/tickets'
           method='POST'
           onSubmit={(e) => createTicket(e)}
         >

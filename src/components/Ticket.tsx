@@ -35,14 +35,18 @@ function Ticket(props: TicketProps): JSX.Element {
   };
   // change ticket status
   const changeStatus = (e: ChangeEvent) => {
+    const status = (e.target as HTMLInputElement).value;
     fetch('/api/tickets/update', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ _id: props.id, status: e.target.value }),
+      body: JSON.stringify({
+        _id: props.id,
+        status,
+      }),
     });
-    setStatus(e.target.value);
+    setStatus(status);
   };
   return (
     <section className='ticket'>
