@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import ticketController from '../controllers/ticketController';
 
-// localhost:3001/api/tickets
 const ticketRouter = Router();
 
 ticketRouter.get('/', ticketController.getTickets, (req, res) =>
