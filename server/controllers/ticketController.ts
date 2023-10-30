@@ -38,10 +38,11 @@ const ticketController = {
     }
     return next();
   },
+  // update ticket status
   updateTicket: async (req, res, next) => {
-    const { _id } = req.params;
+    const { _id, status } = req.body;
     try {
-      res.locals.id = await Ticket.updateOne({ _id });
+      res.locals.id = await Ticket.updateOne({ _id }, { status });
     } catch (error) {
       return next({
         log: `Error occured in ticketController.updateTicket, error ${error}`, // to the develpoper
@@ -54,7 +55,7 @@ const ticketController = {
     return next();
   },
   deleteTicket: async (req, res, next) => {
-    const { _id } = req.params;
+    const { _id } = req.body;
     try {
       res.locals.tickets = await Ticket.deleteOne({ _id });
     } catch (error) {

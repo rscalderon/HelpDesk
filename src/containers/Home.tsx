@@ -23,7 +23,19 @@ const Home = () => {
         email: email,
         description: description,
       }),
-    });
+    })
+      .then(() =>
+        alert(
+          'Your ticket has been received. Thank you for using the Zealthy Helpdesk'
+        )
+      )
+      .catch((e) =>
+        console.error(
+          'Error creating helpdesk ticket:',
+          e,
+          ' Please try again later'
+        )
+      );
   };
 
   return (

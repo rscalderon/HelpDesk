@@ -9,22 +9,38 @@ interface TicketProps {
   status: string;
   created_at: Date;
   id: string;
+  getTickets: () => void;
 }
 
 function Ticket(props: TicketProps): JSX.Element {
   const [status, setStatus] = useState(props.status);
   // respond to ticket
-  const ticketRespond = () =>
-    console.log(
-      'render popup where administrator can write email and send to listed email address'
+  const ticketRespond = () => {
+    window.open(
+      `mailto:${props.email}?subject=HelpDeskTicket:${props.description}`
     );
-  // change ticket status
-  const changeStatus = (e: ChangeEvent) => {
-    fetch('/api/tickets', {
-      method: 'PATCH',
+    console.log(
+      'Would normally render popup and send email with input text as email body'
+    );
+  };
+  const deleteTicket = () => {
+    fetch('/api/tickets/delete', {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
+      body: JSON.stringify({ _id: props.id }),
+    });
+    props.getTickets();
+  };
+  // change ticket status
+  const changeStatus = (e: ChangeEvent) => {
+    fetch('/api/tickets/update', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ _id: props.id, status: e.target.value }),
     });
     setStatus(e.target.value);
   };
@@ -50,7 +66,8 @@ function Ticket(props: TicketProps): JSX.Element {
         <summary>Description:</summary>
         <p>{props.description}</p>
       </details>
-      <button onClick={() => ticketRespond()}>Respond</button> {'   '}
+      <button onClick={ticketRespond}>Respond</button>
+      <button onClick={deleteTicket}>Delete</button>
     </section>
   );
 }

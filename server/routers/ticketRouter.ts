@@ -10,10 +10,10 @@ ticketRouter.get('/', ticketController.getTickets, (req, res) =>
 ticketRouter.post('/', ticketController.addTicket, (req, res) =>
   res.status(200).send(res.locals.newTicket)
 );
-ticketRouter.patch('/', ticketController.updateTicket, (req, res) =>
+ticketRouter.post('/update', ticketController.updateTicket, (req, res) =>
   res.status(200).send(res.locals.newTicket)
 );
-ticketRouter.delete('/', ticketController.deleteTicket, (req, res) =>
+ticketRouter.post('/delete', ticketController.deleteTicket, (req, res) =>
   res.status(200).send(res.locals.newTicket)
 );
 
