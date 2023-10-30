@@ -1,5 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 
+import './NavBar.scss';
+
+// Renders Navbar component
 const Navbar = () => {
   const navigate = useNavigate();
 
@@ -12,17 +15,14 @@ const Navbar = () => {
         <div className='navbar-menu-dropdown'>
           <button className='navbar-menu'>
             <i
-              className='fa-solid fa-bars fa-2xl'
+              className='fa-solid-fa-bars-fa-2xl'
               style={{ color: '#eee' }}
             ></i>
           </button>
           <div className='navbar-menu-dropdown-content'>
             <ul>
-              <li onClick={() => navigate('/favorites')}>Stars</li>
-              <li onClick={() => navigate('/solarsystem')}>Solar System</li>
-              <li onClick={() => navigate('/themes')}>Themes</li>
-              <li onClick={() => navigate('/signup')}>Sign Up</li>
               <li onClick={() => navigate('/login')}>Login</li>
+              <li onClick={() => navigate('/dashboard')}>Dashboard</li>
             </ul>
           </div>
         </div>
