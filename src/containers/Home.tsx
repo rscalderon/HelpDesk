@@ -40,9 +40,7 @@ const Home = () => {
       )
       .catch((e) =>
         console.error(
-          'Error creating helpdesk ticket:',
-          e,
-          ' Please try again later'
+          `Error creating helpdesk ticket:${e} Please try again later`
         )
       );
   };
