@@ -5,12 +5,12 @@ import ticketController from '../controllers/ticketController';
 const ticketRouter = Router();
 
 ticketRouter.get('/', ticketController.getTickets, (req, res) => {
-  return res.status(200).json();
+  return res.status(200).send(res.locals.tickets);
 });
 
 ticketRouter.post('/', ticketController.addTicket, (req, res) => {
-  console.log('inside the ticketRouter');
-  return res.status(200).json();
+  // console.log('sending response to POST request');
+  return res.status(200).send(res.locals.newTicket);
 });
 
 export default ticketRouter;

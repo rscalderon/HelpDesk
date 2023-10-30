@@ -15,19 +15,17 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Serve static assets
-app.use('/dist', express.static(path.resolve('../dist')));
-
-// Serve index.html
-app.use('/', express.static(path.join('../index.html')));
-
 // ticketRouter
 app.use('/tickets', ticketRouter);
 
+// // Serve static assets
+app.use('/dist', express.static(path.resolve('../dist')));
+
+// // Serve index.html
+app.use('/', express.static(path.join('../index.html')));
+
 // Catch-all route
-app.get('*', (req, res) => {
-  res.sendStatus(404);
-});
+app.get('*', (req, res) => res.sendStatus(404));
 
 // Global error handler
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

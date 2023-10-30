@@ -1,24 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // components
 import Ticket from '../components/Ticket';
 import Loader from '../components/Loader';
 
-// declare ticket interface
+interface t {
+  name: string;
+  email: string;
+  description: string;
+  status: string;
+}
 
 // The Dashboard container fetches tickets from the database and renders them
 function Dashboard() {
   const [ticketArr, setTickets] = useState([]);
   // fetch tickets from backend
   const getTickets = () => {
-    fetch('/api/tickets', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
+    fetch('/api/tickets')
       // parse into JS from JSON
-      .then((res) => res.json())
+      .then((data) => data.json())
       // update state to incoming tickets
       .then((tickets) => {
         console.log(tickets);
@@ -26,20 +26,24 @@ function Dashboard() {
       })
       .catch((err) => console.error(err));
   };
-  try {
-    getTickets();
-  } catch (e) {
-    console.error(e);
-  }
+  useEffect(() => getTickets(), []);
   // create ticket component for each ticket from database
-  const ticketComponents = ticketArr.map(() => <Ticket />);
+  const ticketComponents: JSX.Element[] = ticketArr.map((t: t, i) => (
+    <Ticket
+      name={t.name}
+      email={t.email}
+      key={i}
+      description={t.description}
+      status={t.status}
+    />
+  ));
 
   return (
     <>
       <h1 className='tickets-title'>Dashboard</h1>
       <div className='tickets-container'>
         <div className='tickets-tiles'>
-          {!ticketComponents.length ? ticketComponents : <Loader />}
+          {ticketComponents.length ? ticketComponents : <Loader />}
         </div>
       </div>
     </>
