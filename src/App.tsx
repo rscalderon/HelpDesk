@@ -1,43 +1,28 @@
-import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
 
+// styles
 import './App.scss';
-import Navbar from './containers/Navbar.jsx';
+
+// containers
+import Navbar from './components/Navbar.tsx';
+import NotFound from './components/NotFound.tsx';
+import Home from './containers/Home';
+import Login from './containers/Login.tsx';
+import Dashboard from './containers/Dashboard.tsx';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <Navbar />
-      {/* Home route  */}
       <Routes>
-        <Route
-          path='/'
-          element={
-            <>
-              <div>
-                <a href='https://vitejs.dev' target='_blank'>
-                  <img src={viteLogo} className='logo' alt='Vite logo' />
-                </a>
-                <a href='https://react.dev' target='_blank'>
-                  <img
-                    src={reactLogo}
-                    className='logo react'
-                    alt='React logo'
-                  />
-                </a>
-              </div>
-              <div className='card'>
-                <button onClick={() => setCount((count) => count + 1)}>
-                  count is {count}
-                </button>
-              </div>
-            </>
-          }
-        />
+        {/* Home route  */}
+        <Route path='/' element={<Home />} />
+        {/* Login route  */}
+        <Route path='login' element={<Login />} />
+        {/* Dashboard route  */}
+        <Route path='dashboard' element={<Dashboard />} />
+        {/* 404 unknown route */}
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </>
   );
