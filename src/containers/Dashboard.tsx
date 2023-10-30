@@ -29,13 +29,17 @@ function Dashboard() {
   useEffect(() => getTickets(), []);
   // create ticket component for each ticket from database
   const ticketComponents: JSX.Element[] = ticketArr.map((t: t, i) => (
-    <Ticket
-      name={t.name}
-      email={t.email}
-      key={i}
-      description={t.description}
-      status={t.status}
-    />
+    <section key={i}>
+      <Ticket
+        name={t.name}
+        created_at={t.created_at}
+        id={t._id}
+        email={t.email}
+        description={t.description}
+        status={t.status}
+      />
+      <br />
+    </section>
   ));
 
   return (

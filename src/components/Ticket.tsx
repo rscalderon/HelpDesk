@@ -1,3 +1,4 @@
+import { ChangeEvent, useState } from 'react';
 import './Ticket.scss';
 
 // declare ticket interface
@@ -6,22 +7,50 @@ interface TicketProps {
   email: string;
   description: string;
   status: string;
-  key: number;
+  created_at: Date;
+  id: string;
 }
 
 function Ticket(props: TicketProps): JSX.Element {
+  const [status, setStatus] = useState(props.status);
   // respond to ticket
-  const ticketRespond = () => {};
+  const ticketRespond = () =>
+    console.log(
+      'render popup where administrator can write email and send to listed email address'
+    );
+  // change ticket status
+  const changeStatus = (e: ChangeEvent) => {
+    fetch('/api/tickets', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    setStatus(e.target.value);
+  };
   return (
     <section className='ticket'>
-      <>
-        <p>
-          Name: {props.name} Email: {props.email}
-        </p>
-        <p>Status: {props.status}</p>
-      </>
-      <p>Description: {props.description}</p>
-      <button onClick={() => ticketRespond()}>Respond</button>
+      <article>
+        Name: {props.name} Email: {props.email}
+        <form>
+          <label htmlFor='status'> Status: </label>
+          <select
+            name='status'
+            id='status'
+            value={status}
+            onChange={changeStatus}
+          >
+            <option value='new'>New</option>
+            <option value='in progress'>In progress</option>
+            <option value='resolved'>Resolved</option>
+          </select>
+        </form>
+      </article>
+      <details>
+        <summary>Description:</summary>
+        <p>{props.description}</p>
+      </details>
+      <button onClick={() => ticketRespond()}>Respond</button> {'   '}
     </section>
   );
 }
