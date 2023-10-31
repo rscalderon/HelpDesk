@@ -17,7 +17,7 @@ function Ticket(props: TicketProps): JSX.Element {
   // respond to ticket
   const ticketRespond = () => {
     window.open(
-      `mailto:${props.email}?subject=HelpDeskTicket:${props.description}`
+      `mailto:${props.email}?subject=HelpDeskTicket: ${props.description}`
     );
     console.log(
       'Would normally render popup and send email with input text as email body'

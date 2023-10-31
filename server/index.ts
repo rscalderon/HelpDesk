@@ -30,7 +30,7 @@ if (process.env.NODE_ENV === 'production') {
   );
   // Serve index.html
   app.get('/', (req, res) =>
-    res.status(200).sendFile(path.resolve('./dist/index.html'))
+    res.status(200).sendFile(path.resolve('../dist/index.html'))
   );
   // Serve static assets
   app.use(express.static(path.resolve('../dist/assets')));
