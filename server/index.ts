@@ -29,11 +29,11 @@ if (process.env.NODE_ENV === 'production') {
       max: 20,
     })
   );
-  app.use(express.static(path.resolve('../dist')));
-  app.get('/*', (_req, res) => {
-    res.sendFile(path.resolve('../dist/index.html'));
-  });
 }
+app.use(express.static(path.resolve('../dist')));
+app.get('/*', (_req, res) => {
+  res.sendFile(path.resolve('../dist/index.html'));
+});
 
 // console.log(process.env.NODE_ENV);
 
