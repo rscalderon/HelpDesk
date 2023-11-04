@@ -40,7 +40,9 @@ app.get('/', (req, res) =>
 );
 
 // Catch-all route
-app.get('*', (req, res) => res.sendStatus(404));
+app.get('*', (req, res) =>
+  res.status(404).send('This page could not be found')
+);
 
 // Global error handler
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
