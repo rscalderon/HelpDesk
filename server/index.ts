@@ -29,10 +29,16 @@ if (process.env.NODE_ENV === 'production') {
       max: 20,
     })
   );
+  app.use(express.static(path.resolve('../dist')));
+  app.get('/*', (_req, res) => {
+    res.sendFile(path.resolve('../dist/index.html'));
+  });
 }
 
-// Serve static assets
-app.use(express.static(path.resolve('../dist/assets')));
+// console.log(process.env.NODE_ENV);
+
+// // Serve static assets
+// app.use(express.static(path.resolve('../dist/assets')));
 
 // Serve index.html
 app.get('/', (req, res) =>
