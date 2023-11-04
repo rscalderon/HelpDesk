@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/tickets', ticketRouter);
 
-if (process.env.NODE_ENV !== 'development') {
+if (process.env.NODE_ENV !== 'production') {
   // use helmet for protection
   app.use(helmet());
   // rate limiter
@@ -29,13 +29,15 @@ if (process.env.NODE_ENV !== 'development') {
       max: 20,
     })
   );
-  // Serve index.html
-  app.get('/', (req, res) =>
-    res.status(200).sendFile(path.resolve('../dist/index.html'))
-  );
-  // Serve static assets
-  app.use(express.static(path.resolve('../dist/assets')));
 }
+
+// Serve static assets
+app.use(express.static(path.resolve('../dist/assets')));
+
+// Serve index.html
+app.get('/', (req, res) =>
+  res.status(200).sendFile(path.resolve('../dist/index.html'))
+);
 
 // Catch-all route
 app.get('*', (req, res) => res.sendStatus(404));
