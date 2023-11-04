@@ -7,10 +7,10 @@ const ticketController = {
       res.locals.tickets = await Ticket.find({});
     } catch (error) {
       return next({
-        log: `Error occured in ticketController.getTickets, error ${error}`, // to the develpoper
+        log: `Error occured in ticketController.getTickets, error ${error}`,
         status: 500,
         message: {
-          err: 'an error occured when fetching tickets', // message to the user
+          err: 'an error occured when fetching tickets',
         },
       });
     }
@@ -29,10 +29,10 @@ const ticketController = {
       });
     } catch (error) {
       return next({
-        log: `Error occured in ticketController.addTicket, error ${error}`, // to the develpoper
+        log: `Error occured in ticketController.addTicket, error ${error}`,
         status: 500,
         message: {
-          err: 'an error occured when adding the ticket', // message to the user
+          err: 'an error occured when adding the ticket',
         },
       });
     }
@@ -45,10 +45,10 @@ const ticketController = {
       res.locals.id = await Ticket.updateOne({ _id }, { status });
     } catch (error) {
       return next({
-        log: `Error occured in ticketController.updateTicket, error ${error}`, // to the develpoper
+        log: `Error occured in ticketController.updateTicket, error ${error}`,
         status: 500,
         message: {
-          err: 'an error occured when updating the ticket', // message to the user
+          err: 'an error occured when updating the ticket',
         },
       });
     }
@@ -60,10 +60,10 @@ const ticketController = {
       res.locals.tickets = await Ticket.deleteOne({ _id });
     } catch (error) {
       return next({
-        log: `Error occured in ticketController.deleteTicket, error ${error}`, // to the develpoper
+        log: `Error occured in ticketController.deleteTicket, error ${error}`,
         status: 500,
         message: {
-          err: 'an error occured when deleting this ticket', // message to the user
+          err: 'an error occured when deleting this ticket',
         },
       });
     }
