@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/tickets', ticketRouter);
+app.use('/api/tickets', ticketRouter);
 
 if (process.env.NODE_ENV === 'production') {
   // use helmet for protection
