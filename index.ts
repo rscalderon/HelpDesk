@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import helmet from 'helmet';
 import RateLimit from 'express-rate-limit';
 
-import ticketRouter from './routers/ticketRouter';
+import ticketRouter from './server/routers/ticketRouter';
 
 dotenv.config();
 
@@ -30,10 +30,7 @@ if (process.env.NODE_ENV === 'production') {
     })
   );
 }
-app.use(express.static(path.resolve('../dist')));
-app.get('/', (_req, res) => {
-  res.sendFile(path.resolve('../dist/index.html'));
-});
+app.use(express.static(path.resolve('./dist')));
 
 // console.log(process.env.NODE_ENV);
 
@@ -42,7 +39,7 @@ app.get('/', (_req, res) => {
 
 // Serve index.html
 app.get('/', (req, res) =>
-  res.status(200).sendFile(path.resolve('../dist/index.html'))
+  res.status(200).sendFile(path.resolve('./dist/index.html'))
 );
 
 // Catch-all route

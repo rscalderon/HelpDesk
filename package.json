@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "NODE_ENV=production npx tsx server/index.ts",
-    "dev": "concurrently NODE_ENV=development vite & NODE_ENV=development npx tsx watch server/index.ts",
+    "start": "NODE_ENV=production npx tsx index.ts",
+    "dev": "concurrently NODE_ENV=development vite & NODE_ENV=development npx tsx watch index.ts",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
