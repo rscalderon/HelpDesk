@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import helmet from 'helmet';
 import RateLimit from 'express-rate-limit';
 
-import ticketRouter from './routers/ticketRouter';
+import ticketRouter from './server/routers/ticketRouter';
 
 dotenv.config();
 
@@ -17,9 +17,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/tickets', ticketRouter);
+app.use('/api/tickets', ticketRouter);
 
-if (process.env.NODE_ENV !== 'development') {
+if (process.env.NODE_ENV === 'production') {
   // use helmet for protection
   app.use(helmet());
   // rate limiter
@@ -29,16 +29,19 @@ if (process.env.NODE_ENV !== 'development') {
       max: 20,
     })
   );
-  // Serve index.html
-  app.get('/', (req, res) =>
-    res.status(200).sendFile(path.resolve('../dist/index.html'))
-  );
-  // Serve static assets
-  app.use(express.static(path.resolve('../dist/assets')));
 }
+// // Serve static assets
+app.use(express.static(path.resolve('./dist')));
+
+// Serve index.html
+app.get('/', (req, res) =>
+  res.status(200).sendFile(path.resolve('./dist/index.html'))
+);
 
 // Catch-all route
-app.get('*', (req, res) => res.sendStatus(404));
+app.get('*', (req, res) =>
+  res.status(404).send('This page could not be found')
+);
 
 // Global error handler
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
