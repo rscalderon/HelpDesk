@@ -30,12 +30,8 @@ if (process.env.NODE_ENV === 'production') {
     })
   );
 }
-app.use(express.static(path.resolve('./dist')));
-
-// console.log(process.env.NODE_ENV);
-
 // // Serve static assets
-// app.use(express.static(path.resolve('../dist/assets')));
+app.use(express.static(path.resolve('./dist')));
 
 // Serve index.html
 app.get('/', (req, res) =>
