@@ -30,7 +30,7 @@ if (process.env.NODE_ENV === 'production') {
     })
   );
 }
-// // Serve static assets
+// Serve static assets
 app.use(express.static(path.resolve('./dist')));
 
 // Serve index.html
@@ -40,11 +40,10 @@ app.get('/', (req, res) =>
 
 // Catch-all route
 app.get('*', (req, res) =>
-  res.status(404).send('This page could not be found')
+  res.status(404).sendFile(path.resolve('./dist/index.html'))
 );
 
 // Global error handler
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err, req, res, next) => {
   console.log(err);
   const defaultErr = {

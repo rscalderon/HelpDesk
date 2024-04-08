@@ -4,11 +4,11 @@ import { Route, Routes } from 'react-router-dom';
 import './App.scss';
 
 // containers
-import Navbar from './components/Navbar.tsx';
-import NotFound from './components/NotFound.tsx';
+import Navbar from './components/NavBar';
+import NotFound from './components/NotFound';
 import Home from './containers/Home';
-import Login from './containers/Login.tsx';
-import Dashboard from './containers/Dashboard.tsx';
+import Login from './containers/Login';
+import Dashboard from './containers/Dashboard';
 
 function App() {
   return (
