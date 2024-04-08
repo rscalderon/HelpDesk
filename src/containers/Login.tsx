@@ -1,13 +1,11 @@
 /*
-Render Login page container
 
-Here administrators can log in, and once they do they are redirected to the Dashboard.
+Note: For the sake of time, I built the UI but did not implement auth
 
-Note: For the sake of time, I built the UI but did not implement the auth business logic
 */
 
 import { useNavigate } from 'react-router-dom';
-import './Home.scss';
+import './Home/Home.scss';
 
 function Login() {
   const navigate = useNavigate();
@@ -27,6 +25,7 @@ function Login() {
               id='email'
               name='email'
               placeholder='Enter your email here'
+              autoComplete='on'
               autoFocus
               required
             ></input>
