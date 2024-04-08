@@ -39,7 +39,7 @@ function Dashboard() {
 
   return (
     <>
-      <h1 className='tickets-title'>Dashboard</h1>
+      <h2 className='tickets-title'> Admin Dashboard </h2>
       <div className='tickets-container'>
         <div className='tickets-tiles'>
           {ticketComponents ? (
