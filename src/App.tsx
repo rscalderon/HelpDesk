@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import './App.scss';
 
 // containers
-import Navbar from './components/Navbar.tsx';
+import Navbar from './components/NavBar';
 import NotFound from './components/NotFound.tsx';
 import Home from './containers/Home';
 import Login from './containers/Login.tsx';
