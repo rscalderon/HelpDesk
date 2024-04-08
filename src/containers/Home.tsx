@@ -1,6 +1,7 @@
 // assets
 import { FormEvent } from 'react';
 import zealthyLogo from '../assets/ZealthyLogo2.jpeg';
+import './Home.scss';
 
 interface TicketFormOutput extends HTMLCollectionOf<HTMLFormElement> {
   newTicket: {
@@ -46,55 +47,63 @@ const Home = () => {
   };
 
   return (
-    <div className='home'>
-      <br />
+    <div id='home'>
       <p>
         Thank you for using the Zealthy HelpDesk! Please fill out the form
         below:
       </p>
-      <br />
       <>
         <form
+          className='form'
           autoComplete='off'
           name='newTicket'
           method='POST'
           onSubmit={(e) => createTicket(e)}
         >
-          <label htmlFor='name'>Name</label>
-          <input
-            type='text'
-            id='nameInput'
-            name='name'
-            placeholder='Bruce Wayne'
-            autoFocus
-            required
-          />
-          <br /> <br />
-          <label htmlFor='email'> Email</label>
-          <input
-            type='email'
-            id='emailInput'
-            name='email'
-            placeholder='Iam@batman.com'
-            required
-          />
-          <br />
-          <br />
-          <label htmlFor='description'>Description</label>
-          <br />
-          <input
-            type='text'
-            id='descriptionInput'
-            name='description'
-            placeholder='Describe the problem (the more details you provide, the better we can assist you!)'
-            required
-          />
-          <br />
-          <input type='submit' name='submit' />
+          <div className='input-and-label'>
+            <label htmlFor='name'>Name</label>
+
+            <input
+              type='text'
+              id='nameInput'
+              name='name'
+              placeholder='Bruce Wayne'
+              autoFocus
+              required
+            />
+          </div>
+
+          <div className='input-and-label'>
+            <label htmlFor='email'> Email</label>
+
+            <input
+              type='email'
+              id='emailInput'
+              name='email'
+              placeholder='Iam@batman.com'
+              required
+            />
+          </div>
+
+          <div className='input-and-label'>
+            <label htmlFor='description'>Description</label>
+
+            <input
+              type='text'
+              id='descriptionInput'
+              name='description'
+              placeholder='Describe the problem (the more details you provide, the better we can assist you!)'
+              required
+            />
+          </div>
+
+          <button type='submit' id='submitButton'>
+            Submit
+          </button>
         </form>
-        <br />
+
         <a href='https://www.getzealthy.com/' target='_blank'>
-          <img src={zealthyLogo} className='logo zealthy' alt='zealthy logo' />
+          <img src={zealthyLogo} id='logo-zealthy' alt='zealthy logo' />
         </a>
       </>
     </div>
