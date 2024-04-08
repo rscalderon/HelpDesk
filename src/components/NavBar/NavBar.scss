@@ -1,0 +1,36 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 3rem;
+  margin: 5px;
+}
+
+.navbar-title {
+  color: #ddd;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 2em;
+  margin: 10px;
+}
+@media (max-width: 650px) {
+  .navbar-title {
+    font-size: 5vw;
+  }
+  #navbar-right {
+    font-size: 2.5vw;
+  }
+}
+
+#navbar-right {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #ddd;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.navbar-element {
+  padding: 0.5rem;
+}
