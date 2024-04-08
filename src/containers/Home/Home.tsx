@@ -112,9 +112,11 @@ const Home = () => {
           </button>
         </form>
 
-        <a href='https://www.getzealthy.com/' target='_blank'>
-          <img src={zealthyLogo} id='logo-zealthy' alt='zealthy logo' />
-        </a>
+        <div>
+          <a href='https://www.getzealthy.com/' target='_blank'>
+            <img src={zealthyLogo} id='logo-zealthy' alt='zealthy logo' />
+          </a>
+        </div>
       </>
     </div>
   );
