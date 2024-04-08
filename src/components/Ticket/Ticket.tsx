@@ -1,7 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import './Ticket.scss';
 
-// declare ticket interface
 interface TicketProps {
   name: string;
   email: string;
@@ -14,15 +13,16 @@ interface TicketProps {
 
 function Ticket(props: TicketProps): JSX.Element {
   const [status, setStatus] = useState(props.status);
-  // respond to ticket
+
   const ticketRespond = () => {
     window.open(
       `mailto:${props.email}?subject=HelpDeskTicket: ${props.description}`
     );
     console.log(
-      'Would normally render popup and send email with input text as email body'
+      'Would normally render modal with input text boxes for title and body that can be sent directly as an email'
     );
   };
+
   const deleteTicket = () => {
     fetch('/api/tickets/delete', {
       method: 'POST',
@@ -33,9 +33,10 @@ function Ticket(props: TicketProps): JSX.Element {
     });
     props.getTickets();
   };
-  // change ticket status
-  const changeStatus = (e: ChangeEvent) => {
+
+  const changeTicketStatus = (e: ChangeEvent) => {
     const status = (e.target as HTMLInputElement).value;
+
     fetch('/api/tickets/update', {
       method: 'POST',
       headers: {
@@ -46,33 +47,37 @@ function Ticket(props: TicketProps): JSX.Element {
         status,
       }),
     });
+
     setStatus(status);
   };
   return (
-    <section className='ticket'>
-      <article>
-        Name: {props.name} Email: {props.email}
+    <div className='ticket'>
+      <div className='ticketTopLabels'>
+        <p>Name: {props.name}</p>
+        <p>Email: {props.email}</p>
         <form>
-          <label htmlFor='status'> Status: </label>
+          <label htmlFor='status'>Status: </label>
           <select
             name='status'
             id='status'
             value={status}
-            onChange={changeStatus}
+            onChange={changeTicketStatus}
           >
             <option value='new'>New</option>
             <option value='in progress'>In progress</option>
             <option value='resolved'>Resolved</option>
           </select>
         </form>
-      </article>
+      </div>
+      <br />
       <details>
-        <summary>Description:</summary>
+        <summary> Description (click to expand):</summary>
         <p>{props.description}</p>
       </details>
+      <br />
       <button onClick={ticketRespond}>Respond</button>
       <button onClick={deleteTicket}>Delete</button>
-    </section>
+    </div>
   );
 }
 

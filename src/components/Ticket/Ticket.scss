@@ -1,5 +1,18 @@
 .ticket {
   background-color: #4a4a4a;
-  border-radius: 10px;
+  border-radius: 15px;
   padding: 20px;
+}
+
+summary:hover {
+  cursor: pointer;
+}
+
+.ticketTopLabels {
+  display: flex;
+  justify-content: space-around;
+
+  p {
+    margin-top: 0;
+  }
 }
