@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 
-// components
 import Ticket from '../components/Ticket';
 import Loader from '../components/Loader';
 
@@ -13,18 +12,12 @@ interface TicketRecords {
   _id: string;
 }
 
-// The Dashboard container fetches tickets from the database and renders them
 function Dashboard() {
   const [ticketArr, setTickets] = useState([]);
-  // fetch tickets from backend
   const getTickets = () => {
     fetch('/api/tickets')
-      // parse into JS from JSON
       .then((data) => data.json())
-      // update state to incoming tickets
-      .then((tickets) => {
-        setTickets(tickets);
-      })
+      .then((tickets) => setTickets(tickets))
       .catch((err) => console.error(err));
   };
   useEffect(() => getTickets(), []);
