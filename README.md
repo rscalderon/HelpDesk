@@ -1,5 +1,3 @@
-**Note: For sake of time, the app does not have auth and does not automatically send an email, although it auto-populates some email fields.**
-
 # HelpDesk
 On the main page of the app, end users of the service can submit support ticket requests. Necessary fields include name, email and a description of the problem they are experiencing.
 
