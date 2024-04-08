@@ -1,4 +1,4 @@
-import SadDog from '../../assets/saddog2.png';
+import SadDog from '../../assets/saddog.png';
 import './NotFound.scss';
 
 function NotFound() {
