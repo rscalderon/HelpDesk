@@ -1,0 +1,19 @@
+#banner {
+  background-color: green;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 95% 5%;
+}
+
+#banner p {
+  font-size: 1em;
+}
+
+#close-banner {
+  align-content: center;
+  cursor: pointer;
+}
