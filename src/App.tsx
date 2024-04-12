@@ -1,14 +1,12 @@
 import { Route, Routes } from 'react-router-dom';
 
-// styles
-import './App.scss';
-
-// containers
 import Navbar from './components/NavBar';
 import NotFound from './components/NotFound';
-import Home from './containers/Home';
-import Login from './containers/Login';
-import Dashboard from './containers/Dashboard';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+
+import './App.scss';
 
 function App() {
   return (
