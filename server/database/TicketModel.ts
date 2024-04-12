@@ -21,5 +21,4 @@ const ticketSchema = new mongoose.Schema({
 
 const Ticket = mongoose.model('Ticket', ticketSchema);
 
-// export query to controllers as access point to db
 export default Ticket;
