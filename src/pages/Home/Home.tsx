@@ -1,5 +1,8 @@
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
+
 import zealthyLogo from '../../assets/ZealthyLogo2.jpeg';
+
+import Banner from '../../components/Banner';
 
 import './Home.scss';
 
@@ -11,8 +14,8 @@ interface TicketFormOutput extends HTMLCollectionOf<HTMLFormElement> {
   };
 }
 
-// Home page container
 const Home = () => {
+  const [showBanner, setBanner] = useState(false);
   // request backend to create new ticket based on form inputs
   const createTicket = (e: FormEvent) => {
     // prevent redirect and page refresh
@@ -38,9 +41,9 @@ const Home = () => {
       }),
     })
       .then(() => {
-        alert(
-          'Your ticket has been received! You should expect to hear back within 24-48hrs. Thank you for using the Zealthy Helpdesk.'
-        );
+        console.log(document.body);
+        setBanner(true);
+        setTimeout(() => setBanner(false), 5000);
         console.log(
           `Would normally send email here with: \n \n Title: 'New Helpdesk Ticket' \n \n Body: New helpdesk ticket from ${name} (${email}): \n \n ${description} \n \n You can respond directly to this email address or log on to the zealthy helpdesk portal to respond.`
         );
@@ -56,6 +59,7 @@ const Home = () => {
 
   return (
     <div id='home'>
+      {showBanner && <Banner closeBanner={() => setBanner(false)} />}
       <p>
         Thank you for using the Zealthy HelpDesk! Please fill out the form
         below:
