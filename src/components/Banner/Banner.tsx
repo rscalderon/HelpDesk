@@ -1,16 +1,14 @@
 import './Banner.scss';
 
 interface BannerProps {
+  message: string;
   closeBanner: () => void;
 }
 
-function Banner({ closeBanner }: BannerProps) {
+function Banner({ closeBanner, message }: BannerProps) {
   return (
     <div id='banner'>
-      <p>
-        Your ticket has been received! You should expect to hear back within
-        24-48hrs. Thank you for using the Zealthy Helpdesk.
-      </p>
+      <p>{message}</p>
       <div id='close-banner' onClick={closeBanner}>
         X
       </div>
