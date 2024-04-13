@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import './Home/Home.scss';
 
+// Placeholder authentication page
+
 function Login() {
   const navigate = useNavigate();
   return (
@@ -34,12 +36,7 @@ function Login() {
               required
             ></input>
           </div>
-          <button
-            className='login-form-button'
-            // Note: With more time, this would be replaced with a robust authentication and authorization feature
-          >
-            Log In
-          </button>
+          <button className='login-form-button'>Log In</button>
         </form>
         <div className='login-form-links'>
           <button onClick={() => console.log('Trigger reset password feature')}>
