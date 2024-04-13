@@ -1,5 +1,11 @@
 import { ChangeEvent, useState } from 'react';
+
 import './Ticket.scss';
+
+import Modal from '../Modal/Modal';
+
+import Banner from '../Banner/Banner';
+import RespondModal from '../RespondModal/RespondModal';
 
 interface TicketProps {
   name: string;
@@ -8,34 +14,29 @@ interface TicketProps {
   status: string;
   created_at: Date;
   id: string;
-  getTickets: () => void;
+  getTicketsAfterDelete: () => void;
 }
 
 function Ticket(props: TicketProps): JSX.Element {
   const [status, setStatus] = useState(props.status);
+  const [showModal, setModal] = useState(false);
+  const [showBanner, setBanner] = useState(false);
 
-  const ticketRespond = () => {
-    window.open(
-      `mailto:${props.email}?subject=HelpDeskTicket: ${props.description}`
-    );
-    console.log(
-      'Would normally render modal with input text boxes for title and body that can be sent directly as an email'
-    );
-  };
+  const respondTicket = () => setModal(true);
 
-  const deleteTicket = () => {
-    fetch('/api/tickets/delete', {
+  const deleteTicket = async () => {
+    await fetch('/api/tickets/delete', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ _id: props.id }),
     });
-    props.getTickets();
+    props.getTicketsAfterDelete();
   };
 
   const changeTicketStatus = (e: ChangeEvent) => {
-    const status = (e.target as HTMLInputElement).value;
+    const newStatus = (e.target as HTMLInputElement).value;
 
     fetch('/api/tickets/update', {
       method: 'POST',
@@ -44,18 +45,39 @@ function Ticket(props: TicketProps): JSX.Element {
       },
       body: JSON.stringify({
         _id: props.id,
-        status,
+        newStatus,
       }),
     });
 
-    setStatus(status);
+    setStatus(newStatus);
   };
+
   return (
     <div className='ticket'>
+      {showModal && (
+        <Modal hideModal={() => setModal(false)}>
+          <RespondModal
+            name={props.name}
+            email={props.email}
+            description={props.description}
+            hideModal={() => setModal(false)}
+            showBanner={() => {
+              setBanner(true);
+              setTimeout(() => setBanner(false), 5000);
+            }}
+          />
+        </Modal>
+      )}
+      {showBanner && (
+        <Banner
+          closeBanner={() => setBanner(false)}
+          message='Your response has been sent!'
+        />
+      )}
       <div className='ticketTopLabels'>
-        <p>Name: {props.name}</p>
-        <p>Email: {props.email}</p>
-        <form>
+        <p className='ticket-label'>Name: {props.name}</p>
+        <p className='ticket-label'>Email: {props.email}</p>
+        <form className='ticket-label'>
           <label htmlFor='status'>Status: </label>
           <select
             name='status'
@@ -69,14 +91,17 @@ function Ticket(props: TicketProps): JSX.Element {
           </select>
         </form>
       </div>
-      <br />
       <details>
         <summary> Description (click to expand):</summary>
         <p>{props.description}</p>
       </details>
       <br />
-      <button onClick={ticketRespond}>Respond</button>
-      <button onClick={deleteTicket}>Delete</button>
+      <button className='respond-button' onClick={respondTicket}>
+        Respond
+      </button>
+      <button className='delete-button' onClick={deleteTicket}>
+        Delete
+      </button>
     </div>
   );
 }
