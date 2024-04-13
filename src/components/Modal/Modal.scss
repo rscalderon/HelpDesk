@@ -12,7 +12,7 @@
 
 #modal {
   display: grid;
-  grid-template-rows: 20% 80%;
+  grid-template-rows: 15% 80%;
   position: sticky;
   background-color: rgb(116, 116, 116);
   border-radius: 2vw;
@@ -20,4 +20,5 @@
   min-width: 60vw;
   min-height: 40vh;
   max-width: 80vw;
+  max-height: 95vh;
 }
