@@ -15,6 +15,7 @@ const ticketController = {
     }
     return next();
   },
+
   addTicket: async (req, res, next) => {
     const { name, email, description } = req.body;
     try {
@@ -35,6 +36,7 @@ const ticketController = {
     }
     return next();
   },
+
   updateTicket: async (req, res, next) => {
     const { _id, status } = req.body;
     try {
@@ -50,6 +52,7 @@ const ticketController = {
     }
     return next();
   },
+
   deleteTicket: async (req, res, next) => {
     const { _id } = req.body;
     try {
