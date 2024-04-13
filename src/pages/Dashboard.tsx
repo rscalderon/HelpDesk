@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Ticket from '../components/Ticket';
 import Loader from '../components/Loader';
 import { ErrorBoundary } from 'react-error-boundary';
+
+import { getTickets } from '../utils/services';
 
 interface TicketRecords {
   name: string;
@@ -16,16 +18,10 @@ interface TicketRecords {
 function Dashboard() {
   const [ticketArr, setTickets] = useState([]);
 
-  const getTickets = () => {
-    fetch('/api/tickets')
-      .then((data) => data.json())
-      .then((tickets) => setTickets(tickets))
-      .catch((err) => console.error(err));
-  };
+  useEffect(() => {
+    getTickets().then((tickets) => setTickets(tickets));
+  }, []);
 
-  useEffect(() => getTickets(), []);
-
-  // create ticket component for each ticket from database
   const ticketComponents = ticketArr.map((t: TicketRecords, i) => (
     <section key={i}>
       <ErrorBoundary
@@ -44,7 +40,9 @@ function Dashboard() {
           email={t.email}
           description={t.description}
           status={t.status}
-          getTickets={getTickets}
+          getTicketsAfterDelete={() =>
+            getTickets().then((tickets) => setTickets(tickets))
+          }
         />
       </ErrorBoundary>
 
