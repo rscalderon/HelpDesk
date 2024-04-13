@@ -19,13 +19,15 @@ const RespondModal = ({
     <div id='modal-message'>
       <h2>Respond to helpdesk</h2>
       <p>
-        Helpdesk from user {name} ({email}): {description}
+        Helpdesk from user {name} ({email}):{' '}
+        {description.length > 50
+          ? description.slice(0, 100) + '...'
+          : description}
       </p>
       <form
         id='createTicketForm'
         className='form'
         name='newTicket'
-        method='POST'
         onSubmit={() =>
           console.log(
             `Would normally email to ${email} with subject line: HelpDeskTicket: ${description}`
