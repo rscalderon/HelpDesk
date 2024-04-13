@@ -1,9 +1,3 @@
-/*
-
-Note: For the sake of time, I built the UI but did not implement auth
-
-*/
-
 import { useNavigate } from 'react-router-dom';
 import './Home/Home.scss';
 
