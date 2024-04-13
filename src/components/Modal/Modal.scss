@@ -1,0 +1,23 @@
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.166);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#modal {
+  display: grid;
+  grid-template-rows: 20% 80%;
+  position: sticky;
+  background-color: rgb(116, 116, 116);
+  border-radius: 2vw;
+  padding: 2vw;
+  min-width: 60vw;
+  min-height: 40vh;
+  max-width: 80vw;
+}
