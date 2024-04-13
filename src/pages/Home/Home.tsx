@@ -4,6 +4,8 @@ import zealthyLogo from '../../assets/ZealthyLogo2.jpeg';
 
 import Banner from '../../components/Banner';
 
+import { postTicket } from '../../utils/services';
+
 import './Home.scss';
 
 interface TicketFormOutput extends HTMLCollectionOf<HTMLFormElement> {
@@ -16,50 +18,48 @@ interface TicketFormOutput extends HTMLCollectionOf<HTMLFormElement> {
 
 const Home = () => {
   const [showBanner, setBanner] = useState(false);
-  // request backend to create new ticket based on form inputs
-  const createTicket = (e: FormEvent) => {
+
+  /**
+   * ************************************
+   *
+   * @module  createTicket
+   * @param {FormEvent} e Form inputs
+   * @description Create ticket in database based on form inputs
+   * (name, email, description) and returns a promise
+   *
+   * ************************************
+   */
+
+  const createTicket = async (e: FormEvent) => {
     // prevent redirect and page refresh
     e.preventDefault();
-    const formInfo = (document.forms as TicketFormOutput).newTicket;
-    // extract form information
-    const name = formInfo.name.value;
-    formInfo.name.value = '';
-    const email = formInfo.email.value;
-    formInfo.email.value = '';
-    const description = formInfo.description.value;
-    formInfo.description.value = '';
 
-    fetch('/api/tickets', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        description: description,
-      }),
-    })
-      .then(() => {
-        console.log(document.body);
-        setBanner(true);
-        setTimeout(() => setBanner(false), 5000);
-        console.log(
-          `Would normally send email here with: \n \n Title: 'New Helpdesk Ticket' \n \n Body: New helpdesk ticket from ${name} (${email}): \n \n ${description} \n \n You can respond directly to this email address or log on to the zealthy helpdesk portal to respond.`
-        );
-      })
-      .catch((e) =>
-        console.error(
-          `Would normally log to monitoring service: ${{
-            error: `Error creating helpdesk ticket:${e} Please try again later`,
-          }}`
-        )
-      );
+    // extract form information
+    const { newTicket } = document.forms as TicketFormOutput;
+    const name = newTicket.name.value;
+    newTicket.name.value = '';
+    const email = newTicket.email.value;
+    newTicket.email.value = '';
+    const description = newTicket.description.value;
+    newTicket.description.value = '';
+
+    // create ticket in database
+    await postTicket(name, email, description);
+
+    // display banner for maximum of 5s
+    setBanner(true);
+    setTimeout(() => setBanner(false), 5000);
   };
 
   return (
     <div id='home'>
-      {showBanner && <Banner closeBanner={() => setBanner(false)} />}
+      {showBanner && (
+        <Banner
+          closeBanner={() => setBanner(false)}
+          message='Your ticket has been received! You should expect to hear back within
+        24-48hrs. Thank you for using the Zealthy Helpdesk.'
+        />
+      )}
       <p>
         Thank you for using the Zealthy HelpDesk! Please fill out the form
         below:
@@ -102,8 +102,7 @@ const Home = () => {
           <div className='input-and-label'>
             <label htmlFor='description'>Description</label>
 
-            <input
-              type='text'
+            <textarea
               id='description'
               name='description'
               placeholder='Describe the problem (the more details you provide, the better we can assist you!)'
@@ -111,7 +110,7 @@ const Home = () => {
             />
           </div>
 
-          <button type='submit' id='submitButton'>
+          <button type='submit' id='submit-button'>
             Submit
           </button>
         </form>
