@@ -31,18 +31,18 @@ if (process.env.NODE_ENV === 'production') {
     })
   );
   // Catch-all route (frontend handles routing)
-  app.get('*', (_req, res) =>
+  app.get('*', (req, res) =>
     res.status(200).sendFile(path.resolve('./dist/index.html'))
   );
 }
 
 // Catch-all route (frontend handles routing)
-app.get('*', (_req, res) =>
+app.get('*', (req, res) =>
   res.status(200).sendFile(path.resolve('./index.html'))
 );
 
 // Global error handler
-app.use((err, _req, res, _next) => {
+app.use((err, req, res, next) => {
   console.log(err);
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
