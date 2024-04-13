@@ -19,27 +19,30 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/tickets', ticketRouter);
 
+// Serve static assets
+app.use(express.static(path.resolve('./dist')));
+
 if (process.env.NODE_ENV === 'production') {
-  // use helmet for protection
   app.use(helmet());
-  // rate limiter
   app.use(
     RateLimit({
       windowMs: 1 * 60 * 1000, // 1 minute
       max: 20,
     })
   );
+  // Catch-all route (frontend handles routing)
+  app.get('*', (_req, res) =>
+    res.status(200).sendFile(path.resolve('./dist/index.html'))
+  );
 }
-// Serve static assets
-app.use(express.static(path.resolve('./dist')));
 
 // Catch-all route (frontend handles routing)
-app.get('*', (req, res) =>
-  res.status(200).sendFile(path.resolve('./dist/index.html'))
+app.get('*', (_req, res) =>
+  res.status(200).sendFile(path.resolve('./index.html'))
 );
 
 // Global error handler
-app.use((err, req, res, next) => {
+app.use((err, _req, res, _next) => {
   console.log(err);
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
