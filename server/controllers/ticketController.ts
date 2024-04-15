@@ -1,4 +1,4 @@
-import Ticket from '../database/ticketModel';
+import Ticket from '../database/TicketModel';
 
 const ticketController = {
   getTickets: async (req, res, next) => {
