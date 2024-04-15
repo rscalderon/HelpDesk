@@ -4,6 +4,7 @@ interface RespondModalProps {
   name: string;
   email: string;
   description: string;
+  created_at: string;
   hideModal: () => void;
   showBanner: () => void;
 }
@@ -12,6 +13,7 @@ const RespondModal = ({
   name,
   email,
   description,
+  created_at,
   hideModal,
   showBanner,
 }: RespondModalProps) => {
@@ -28,20 +30,27 @@ const RespondModal = ({
         id='createTicketForm'
         className='form'
         name='newTicket'
-        onSubmit={() =>
+        onSubmit={(e) => {
+          e.preventDefault();
+          hideModal();
+          showBanner();
           console.log(
-            `Would normally email to ${email} with subject line: HelpDeskTicket: ${description}`
-          )
-        }
+            `Would normally email to ${email} with default subject line (user can customize in modal): Response to helpdesk ticket created at ${created_at}: ${
+              description.length > 20
+                ? description.slice(0, 10) + '...'
+                : description
+            }`
+          );
+        }}
       >
         <div className='input-and-label'>
-          <label htmlFor='name'>Subject Line</label>
+          <label htmlFor='subject'>Subject Line</label>
           <input
             type='text'
-            id='name'
-            name='name'
+            id='subject'
+            name='subject'
             placeholder={`Email subject line`}
-            defaultValue={`Response to helpdesk ticket: ${
+            defaultValue={`Response to helpdesk ticket created at ${created_at}: ${
               description.length > 20
                 ? description.slice(0, 10) + '...'
                 : description
@@ -60,17 +69,7 @@ const RespondModal = ({
             required
           />
         </div>
-        <button
-          type='submit'
-          onClick={(e) => {
-            e.preventDefault();
-
-            hideModal();
-            showBanner();
-          }}
-        >
-          Send
-        </button>
+        <button type='submit'>Send</button>
       </form>
     </div>
   );
