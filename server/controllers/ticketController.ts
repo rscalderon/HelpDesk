@@ -9,7 +9,7 @@ const ticketController = {
         log: `Error occurred in ticketController.getTickets, error ${error}`,
         status: 500,
         message: {
-          err: 'an error occurred when fetching tickets',
+          err: 'an error occurred while fetching tickets',
         },
       });
     }
