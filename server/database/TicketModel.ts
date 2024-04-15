@@ -20,6 +20,4 @@ const ticketSchema = new mongoose.Schema({
   created_at: { type: Date, default: Date.now() },
 });
 
-const Ticket = mongoose.model('Ticket', ticketSchema);
-
-export default Ticket;
+export default mongoose.model('Ticket', ticketSchema);
