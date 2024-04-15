@@ -28,6 +28,21 @@ h1 {
   line-height: 1.1;
 }
 
+@media (max-width: 500px) {
+  h2 {
+    font-size: 5vw;
+  }
+  p {
+    font-size: 4vw;
+  }
+  select::placeholder {
+    font-size: 4vw;
+  }
+  button {
+    font-size: 4vw;
+  }
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
