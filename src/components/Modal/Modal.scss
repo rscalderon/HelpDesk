@@ -21,4 +21,9 @@
   min-height: 40vh;
   max-width: 80vw;
   max-height: 95vh;
+  overflow-wrap: anywhere;
+
+  p {
+    max-width: 80vw;
+  }
 }
