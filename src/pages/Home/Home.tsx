@@ -79,7 +79,7 @@ const Home = () => {
               type='text'
               id='name'
               name='name'
-              placeholder='Bruce Wayne'
+              placeholder='Jane Doe'
               autoFocus
               required
               autoComplete='on'
@@ -93,7 +93,7 @@ const Home = () => {
               type='email'
               id='email'
               name='email'
-              placeholder='Iam@batman.com'
+              placeholder='johndoe@emailservice.com'
               required
               autoComplete='on'
             />
