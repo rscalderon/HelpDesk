@@ -1,4 +1,11 @@
 import { ChangeEvent, useState } from 'react';
+
+import Modal from '../Modal/Modal';
+import Banner from '../Banner/Banner';
+import RespondModal from '../RespondModal';
+
+import { changeTicketStatus, deleteTicket } from '../../utils/services';
+
 import './Ticket.scss';
 
 interface TicketProps {
@@ -8,60 +15,63 @@ interface TicketProps {
   status: string;
   created_at: Date;
   id: string;
-  getTickets: () => void;
+  getTicketsAfterDelete: () => void;
 }
 
-function Ticket(props: TicketProps): JSX.Element {
-  const [status, setStatus] = useState(props.status);
+function Ticket({
+  name,
+  email,
+  description,
+  status,
+  created_at,
+  id,
+  getTicketsAfterDelete,
+}: TicketProps): JSX.Element {
+  const [displayedStatus, setStatus] = useState(status);
+  const [showRespondModal, setRespondModal] = useState(false);
+  const [showBanner, setBanner] = useState(false);
 
-  const ticketRespond = () => {
-    window.open(
-      `mailto:${props.email}?subject=HelpDeskTicket: ${props.description}`
-    );
-    console.log(
-      'Would normally render modal with input text boxes for title and body that can be sent directly as an email'
-    );
+  const changeTicketDropdownStatus = (e: ChangeEvent) => {
+    const newStatus = (e.target as HTMLInputElement).value;
+    changeTicketStatus(newStatus, id).then(() => setStatus(newStatus));
   };
 
-  const deleteTicket = () => {
-    fetch('/api/tickets/delete', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ _id: props.id }),
-    });
-    props.getTickets();
-  };
-
-  const changeTicketStatus = (e: ChangeEvent) => {
-    const status = (e.target as HTMLInputElement).value;
-
-    fetch('/api/tickets/update', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        _id: props.id,
-        status,
-      }),
-    });
-
-    setStatus(status);
-  };
   return (
     <div className='ticket'>
-      <div className='ticketTopLabels'>
-        <p>Name: {props.name}</p>
-        <p>Email: {props.email}</p>
-        <form>
+      {showRespondModal && (
+        <Modal hideModal={() => setRespondModal(false)}>
+          <RespondModal
+            name={name}
+            email={email}
+            description={description}
+            created_at={created_at.toString().substring(0, 10)}
+            hideModal={() => setRespondModal(false)}
+            showBanner={() => {
+              setBanner(true);
+              setTimeout(() => setBanner(false), 5000);
+            }}
+          />
+        </Modal>
+      )}
+      {showBanner && (
+        <Banner
+          closeBanner={() => setBanner(false)}
+          message='Your response has been sent!'
+        />
+      )}
+      <div className='ticket-top-labels'>
+        <p className='ticket-label'>Name: {name}</p>
+        <p className='ticket-label'>Email: {email}</p>
+        <p className='ticket-label'>
+          Date created: {created_at.toString().substring(0, 10)}
+        </p>
+        <form className='ticket-label'>
           <label htmlFor='status'>Status: </label>
           <select
             name='status'
             id='status'
-            value={status}
-            onChange={changeTicketStatus}
+            value={displayedStatus}
+            onChange={changeTicketDropdownStatus}
           >
             <option value='new'>New</option>
             <option value='in progress'>In progress</option>
@@ -69,14 +79,20 @@ function Ticket(props: TicketProps): JSX.Element {
           </select>
         </form>
       </div>
-      <br />
       <details>
         <summary> Description (click to expand):</summary>
-        <p>{props.description}</p>
+        <p>{description}</p>
       </details>
       <br />
-      <button onClick={ticketRespond}>Respond</button>
-      <button onClick={deleteTicket}>Delete</button>
+      <button className='respond-button' onClick={() => setRespondModal(true)}>
+        Respond
+      </button>
+      <button
+        className='delete-button'
+        onClick={() => deleteTicket(id).then(getTicketsAfterDelete)}
+      >
+        Delete
+      </button>
     </div>
   );
 }

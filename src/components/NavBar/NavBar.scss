@@ -17,8 +17,11 @@
   .navbar-title {
     font-size: 5vw;
   }
+}
+
+@media (max-width: 500px) {
   #navbar-right {
-    font-size: 2.5vw;
+    font-size: 3vw;
   }
 }
 
@@ -32,5 +35,5 @@
 }
 
 .navbar-element {
-  padding: 0.5rem;
+  padding: 2vw;
 }

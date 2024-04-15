@@ -15,7 +15,9 @@
 
 #logo-zealthy {
   border-radius: 10%;
+  min-height: 60px;
   max-height: 5vw;
+  min-width: 60px;
   max-width: 5vw;
   margin: 1.5em;
   filter: drop-shadow(0 0 1.5em #61fba694);
@@ -33,6 +35,8 @@
   margin: 1%;
 }
 
-input {
-  margin: 1%;
+#submit-button {
+  background-color: rgba(47, 255, 0, 0.179);
+  border-color: rgba(60, 255, 0, 0.471);
+  
 }

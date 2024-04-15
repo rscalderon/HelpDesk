@@ -1,18 +1,39 @@
 .ticket {
   background-color: #4a4a4a;
   border-radius: 15px;
-  padding: 20px;
+  padding: 10px;
+  overflow-wrap: break-word;
+  overflow: hidden;
 }
 
 summary:hover {
   cursor: pointer;
 }
 
-.ticketTopLabels {
+.ticket-top-labels {
   display: flex;
   justify-content: space-around;
-
+  flex-wrap: wrap;
+  padding: 1vh;
   p {
     margin-top: 0;
   }
+  margin-bottom: 2vh;
+}
+
+.ticket-label {
+  margin-right: 2vw;
+  margin-left: 2vw;
+  overflow-wrap: break-word;
+  text-overflow: clip;
+}
+
+.delete-button {
+  background-color: rgba(255, 0, 0, 0.179);
+  border-color: rgba(255, 0, 0, 0.471);
+}
+
+.respond-button {
+  background-color: rgba(47, 255, 0, 0.179);
+  border-color: rgba(60, 255, 0, 0.471);
 }
