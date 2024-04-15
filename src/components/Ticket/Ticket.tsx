@@ -1,11 +1,12 @@
 import { ChangeEvent, useState } from 'react';
 
-import './Ticket.scss';
-
 import Modal from '../Modal/Modal';
-
 import Banner from '../Banner/Banner';
-import RespondModal from '../RespondModal/RespondModal';
+import RespondModal from '../RespondModal';
+
+import { changeTicketStatus, deleteTicket } from '../../utils/services';
+
+import './Ticket.scss';
 
 interface TicketProps {
   name: string;
@@ -17,50 +18,34 @@ interface TicketProps {
   getTicketsAfterDelete: () => void;
 }
 
-function Ticket(props: TicketProps): JSX.Element {
-  const [status, setStatus] = useState(props.status);
-  const [showModal, setModal] = useState(false);
+function Ticket({
+  name,
+  email,
+  description,
+  status,
+  created_at,
+  id,
+  getTicketsAfterDelete,
+}: TicketProps): JSX.Element {
+  const [displayedStatus, setStatus] = useState(status);
+  const [showRespondModal, setRespondModal] = useState(false);
   const [showBanner, setBanner] = useState(false);
 
-  const respondTicket = () => setModal(true);
-
-  const deleteTicket = async () => {
-    await fetch('/api/tickets/delete', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ _id: props.id }),
-    });
-    props.getTicketsAfterDelete();
-  };
-
-  const changeTicketStatus = (e: ChangeEvent) => {
+  const changeTicketDropdownStatus = (e: ChangeEvent) => {
     const newStatus = (e.target as HTMLInputElement).value;
-
-    fetch('/api/tickets/update', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        _id: props.id,
-        newStatus,
-      }),
-    });
-
-    setStatus(newStatus);
+    changeTicketStatus(newStatus, id).then(() => setStatus(newStatus));
   };
 
   return (
     <div className='ticket'>
-      {showModal && (
-        <Modal hideModal={() => setModal(false)}>
+      {showRespondModal && (
+        <Modal hideModal={() => setRespondModal(false)}>
           <RespondModal
-            name={props.name}
-            email={props.email}
-            description={props.description}
-            hideModal={() => setModal(false)}
+            name={name}
+            email={email}
+            description={description}
+            created_at={created_at.toString().substring(0, 10)}
+            hideModal={() => setRespondModal(false)}
             showBanner={() => {
               setBanner(true);
               setTimeout(() => setBanner(false), 5000);
@@ -74,16 +59,19 @@ function Ticket(props: TicketProps): JSX.Element {
           message='Your response has been sent!'
         />
       )}
-      <div className='ticketTopLabels'>
-        <p className='ticket-label'>Name: {props.name}</p>
-        <p className='ticket-label'>Email: {props.email}</p>
+      <div className='ticket-top-labels'>
+        <p className='ticket-label'>Name: {name}</p>
+        <p className='ticket-label'>Email: {email}</p>
+        <p className='ticket-label'>
+          Date created: {created_at.toString().substring(0, 10)}
+        </p>
         <form className='ticket-label'>
           <label htmlFor='status'>Status: </label>
           <select
             name='status'
             id='status'
-            value={status}
-            onChange={changeTicketStatus}
+            value={displayedStatus}
+            onChange={changeTicketDropdownStatus}
           >
             <option value='new'>New</option>
             <option value='in progress'>In progress</option>
@@ -93,13 +81,16 @@ function Ticket(props: TicketProps): JSX.Element {
       </div>
       <details>
         <summary> Description (click to expand):</summary>
-        <p>{props.description}</p>
+        <p>{description}</p>
       </details>
       <br />
-      <button className='respond-button' onClick={respondTicket}>
+      <button className='respond-button' onClick={() => setRespondModal(true)}>
         Respond
       </button>
-      <button className='delete-button' onClick={deleteTicket}>
+      <button
+        className='delete-button'
+        onClick={() => deleteTicket(id).then(getTicketsAfterDelete)}
+      >
         Delete
       </button>
     </div>
