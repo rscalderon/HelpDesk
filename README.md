@@ -1,27 +1,7 @@
-# React + TypeScript + Vite
+# HelpDesk
+On the main page of the app, end users of the service can submit support ticket requests. Necessary fields include name, email and a description of the problem they are experiencing.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+On a separate page, the backend admin panel, support staff can see a list summary of each ticket, including status. Support staff can drill down into the ticket to access a detailed description and respond to any ticket, as well as update the status of the ticket. Possible statuses are “new”, “in progress”, and “resolved”.
 
-Currently, two official plugins are available:
+[Here](https://zealthy-help-desk-359267cc94ea.herokuapp.com/) is the link to the live site on Heroku.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list

@@ -1,0 +1,38 @@
+#home {
+  padding: 5vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.form {
+  padding: 2%;
+  min-height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#logo-zealthy {
+  border-radius: 10%;
+  max-height: 5vw;
+  max-width: 5vw;
+  margin: 1.5em;
+  filter: drop-shadow(0 0 1.5em #61fba694);
+}
+
+#logo-zealthy:hover {
+  box-shadow: 0px 0px 20px 2px rgb(71, 145, 63);
+}
+
+.input-and-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 70vw;
+  margin: 1%;
+}
+
+input {
+  margin: 1%;
+}
