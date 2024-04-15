@@ -27,15 +27,14 @@ const RespondModal = ({
           : description}
       </p>
       <form
-        id='createTicketForm'
         className='form'
-        name='newTicket'
+        name='ticketRespond'
         onSubmit={(e) => {
           e.preventDefault();
           hideModal();
           showBanner();
           console.log(
-            `Would normally email to ${email} with default subject line (user can customize in modal): Response to helpdesk ticket created at ${created_at}: ${
+            `Would normally send email to ${email} and copy admin with default subject line (user can customize in modal): Response to helpdesk ticket created at ${created_at}: ${
               description.length > 20
                 ? description.slice(0, 10) + '...'
                 : description
@@ -61,10 +60,10 @@ const RespondModal = ({
           />
         </div>
         <div className='input-and-label'>
-          <label htmlFor='description'>Response</label>
+          <label htmlFor='response'>Response</label>
           <textarea
-            id='description'
-            name='description'
+            id='response'
+            name='response'
             placeholder='Enter your response here'
             required
           />
